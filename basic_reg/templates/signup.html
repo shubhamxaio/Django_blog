@@ -1,0 +1,11 @@
+<h2>Sign up</h2>
+
+{% if msg %}
+<label style="color: red">{{ msg }}</label>
+{% endif %}
+
+<form method="post">
+{% csrf_token %}
+{{ form.as_p }}
+<button type="submit">Sign up</button>
+</form>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create your new post</title>
+    {% include 'bootstrap_cdn.html' %}
+    <style>
+        .center-align {
+            margin: 0 auto;
+            width: 80%
+        }
+
+        .header {
+            text-align: center;
+            color: #FFFFFF;
+            background-color: #204d74;
+        }
+
+        .glyphicon {
+            font-size: 28px;
+        }
+
+    </style>
+</head>
+<body>
+
+<h1 class="jumbotron center-align header">Create New Post &nbsp;...<span class="glyphicon glyphicon-pencil"></span></h1>
+<br>
+
+{% if msg %}
+    <div class="alert alert-success center-align">
+        <strong>Success!</strong> {{ msg }}
+    </div>
+
+{% endif %}
+{% if error_msg %}
+    <div class="alert alert-danger center-align">
+        <strong>Failed!</strong> {{ error_msg }}
+    </div>
+{% endif %}
+
+<br>
+
+<form method="post" class="center-align">
+    {% csrf_token %}
+    <div class="form-group">
+        <label>Title:</label>
+        <input type="text" class="form-control" name="title" required>
+    </div>
+    <div class="form-group">
+        <label>Description:</label>
+        <textarea class="form-control" rows="5" name="description" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary" style="float: right">Create</button>
+</form>
+<a href="{% url 'home' %}" class="btn">Go Back</a>
+</body>
+</html>

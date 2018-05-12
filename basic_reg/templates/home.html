@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    {% include 'bootstrap_cdn.html' %}
+</head>
+<body>
+
+{#<h1 class="jumbotron">Welcome {{ user }}</h1>#}
+
+{#<a href="{% url 'logout' %}">Logout</a>#}
+<!-- NavBar -->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">APPLICATION</a>
+        </div>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container-fluid">
+    <div class="row content">
+
+        <!-- LeftSide Bar -->
+        <div class="col-sm-3">
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="#" class="active">Dashboard</a></li>
+                <li><a href="#">Blogs</a></li>
+                <li><a href="#">Posts</a></li>
+                <li><a href="#">Activity</a></li>
+            </ul>
+            <br>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search Something...">
+                <span class="input-group-btn">
+          <button class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+            </div>
+        </div>
+        <!-- LeftSide Bar End -->
+
+        <div class="col-sm-9">
+            <h2>
+                Welcome <b>{{ user | title }}</b>
+            </h2>
+            <h4>Today <b><label id="date"></label></b></h4>
+            <hr>
+            <a href="{% url 'create_post' %}" class="btn btn-primary" style="float: right">Create post</a>
+            {% for blog in blogs %}
+            <h2>{{ blog.title }}</h2>
+            <h5><span class="glyphicon glyphicon-time"></span> Posted on, {{ blog.created_at }}.</h5>
+            <h5><a href="{% url 'delete_post' blog_id=blog.id %}" class="label label-danger">Delete</a> <span class="label label-primary">View</span></h5><br>
+
+            {% endfor %}
+            <br><br>
+        </div>
+    </div>
+</div>
+
+<footer class="container-fluid">
+</footer>
+
+<script>
+    var d = new Date();
+    document.getElementById("date").innerHTML = d;
+</script>
+
+</body>
+</html>
